@@ -25,7 +25,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var PORT = process.env.PORT || 3000;
 var server = (0, _express2.default)();
 var renderBody = function renderBody(body) {
-  return '\n    <!DOCTYPE html>\n    <html>\n      <head>\n        <title>Hello</title>\n      </head>\n      <body>\n        <div id="root">' + body + '</div>\n      </body>\n      <script src="/bundle.js"></script>\n    </html>\n  ';
+  return '\n    <!DOCTYPE html>\n    <html>\n      <head>\n        <meta charset="UTF-8">\n        <meta name="viewport" content="width=device-width, initial-scale=1.0">\n        <meta http-equiv="X-UA-Compatible" content="ie=edge">\n        <title>Hello</title>\n        <link rel="icon" href="data:;base64,iVBORw0KGgo=">\n      </head>\n      <body>\n        <div id="root">' + body + '</div>\n      </body>\n      <script src="/bundle.js"></script>\n    </html>\n  ';
 };
 
 server.use(_express2.default.static(_path2.default.resolve(__dirname)));
