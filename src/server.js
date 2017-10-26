@@ -3,7 +3,7 @@ import path from 'path';
 import React from 'react';
 import { renderToString } from 'react-dom/server';
 import { match, RouterContext } from 'react-router';
-// import routes from './src/app/routes';
+import routes from './app/routes';
 
 const PORT = process.env.PORT || 3000;
 const server = express();
@@ -19,21 +19,21 @@ const renderBody = (body) => {
       <body>
         <div id="root">${body}</div>
       </body>
-      <script src="bundle.js"></script>
+      <script src="/bundle.js"></script>
     </html>
   `;
 };
 
-server.use(express.static(path.resolve(__dirname, 'dist')));
-// server.get('/', (req, res) => {
-//   match({ routes, location: req.url }, (err, redirect, props) => {
-//     const body = renderToString(<RouterContext {...props} />);
-//     res.send(renderBody(body));
-//   });
-// });
+server.use(express.static(path.resolve(__dirname)));
 server.get('*', (req, res) => {
-  res.render('index');
+  match({ routes, location: req.url }, (err, redirect, props) => {
+    const body = renderToString(<RouterContext {...props} />);
+    res.send(renderBody(body));
+  });
 });
+// server.get('*', (req, res) => {
+//   res.render('index');
+// });
 
 server.listen(PORT, function() {
   console.log('Express server running at localhost:' + PORT);

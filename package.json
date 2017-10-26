@@ -5,9 +5,11 @@
   "main": "index.js",
   "scripts": {
     "dev": "webpack-dev-server --config webpack.config.dev.js",
-    "dev:serve": "nodemon server --exec babel-node",
-    "bundle": "webpack --config webpack.config.dev.js",
-    "start": "node server.compiled.js",
+    "dev:serve": "nodemon src/server --exec babel-node",
+    "bundle:client": "webpack --config webpack.config.dev.js",
+    "bundle:server": "babel src -D -d dist",
+    "bundle": "webpack --config webpack.config.dev.js && babel src -D -d dist",
+    "start": "node dist/server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Quan Lieu <lieuchiquan@gmail.com>",
