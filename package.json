@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "webpack-dev-server --config webpack.config.dev.js",
     "dev:serve": "nodemon src/server --exec babel-node",
+    "dev:build": "webpack --config webpack.config.dev.js",
     "bundle": "webpack --config webpack.config.serve.js && babel src -D -d dist",
     "start": "node dist/server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
