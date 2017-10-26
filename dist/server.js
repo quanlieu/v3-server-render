@@ -25,10 +25,17 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var PORT = process.env.PORT || 3000;
 var server = (0, _express2.default)();
 var renderBody = function renderBody(body) {
-  return '\n    <!DOCTYPE html>\n    <html>\n      <head>\n        <title>Hello</title>\n        <link rel="stylesheet" href="/assets/index.css" />\n      </head>\n      \n      <body>\n        <div id="root">' + body + '</div>\n      </body>\n      <script src="/bundle.js"></script>\n    </html>\n  ';
+  return '\n    <!DOCTYPE html>\n    <html>\n      <head>\n        <title>Hello</title>\n      </head>\n      \n      <body>\n        <div id="root">' + body + '</div>\n      </body>\n      <script src="/bundle.js"></script>\n    </html>\n  ';
 };
 
 server.use(_express2.default.static(_path2.default.resolve(__dirname)));
+server.get('/', function (req, res) {
+  (0, _reactRouter.match)({ routes: _routes2.default, location: req.url }, function (err, redirect, props) {
+    var body = (0, _server.renderToString)(_react2.default.createElement(_reactRouter.RouterContext, props));
+    res.send(renderBody(body));
+  });
+});
+
 server.get('*', function (req, res) {
   (0, _reactRouter.match)({ routes: _routes2.default, location: req.url }, function (err, redirect, props) {
     var body = (0, _server.renderToString)(_react2.default.createElement(_reactRouter.RouterContext, props));

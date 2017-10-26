@@ -13,9 +13,7 @@ const renderBody = (body) => {
     <html>
       <head>
         <title>Hello</title>
-        <link rel="stylesheet" href="/assets/index.css" />
       </head>
-      
       <body>
         <div id="root">${body}</div>
       </body>
@@ -25,6 +23,13 @@ const renderBody = (body) => {
 };
 
 server.use(express.static(path.resolve(__dirname)));
+server.get('/', (req, res) => {
+  match({ routes, location: req.url }, (err, redirect, props) => {
+    const body = renderToString(<RouterContext {...props} />);
+    res.send(renderBody(body));
+  });
+});
+
 server.get('*', (req, res) => {
   match({ routes, location: req.url }, (err, redirect, props) => {
     const body = renderToString(<RouterContext {...props} />);

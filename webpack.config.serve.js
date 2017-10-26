@@ -1,11 +1,10 @@
 const path = require('path');
 
 module.exports = {
-  entry: './server',
+  entry: './src/app/index',
   output: {
     path: path.resolve('dist'),
-    filename: 'bundle.js',
-    publicPath: '/'
+    filename: 'bundle.js'
   },
   module: {
     rules: [
@@ -13,9 +12,5 @@ module.exports = {
       { test: /\.css$/, use: ['style-loader', 'css-loader'], exclude: /node_modules/ },
       { test: /\.(png|svg|jpg|gif)$/, use: ['file-loader'], exclude: /node_modules/}
     ]
-  },
-  node: {
-    fs: 'empty',
-    net: 'empty'
   }
 }
