@@ -4,7 +4,8 @@ module.exports = {
   entry: './src/app/index',
   output: {
     path: path.resolve('dist'),
-    filename: 'bundle.js'
+    filename: 'bundle.js',
+    libraryTarget: 'umd'
   },
   module: {
     rules: [
