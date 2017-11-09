@@ -6,6 +6,7 @@ import { match, RouterContext } from 'react-router';
 import routes from './app/routes';
 
 const PORT = process.env.PORT || 3000;
+const REACT_APP_ENV = process.env.REACT_APP_ENV || 'development'
 const server = express();
 const renderBody = body => {
   return `
@@ -26,7 +27,8 @@ const renderBody = body => {
   `;
 };
 
-server.use(express.static(path.resolve(__dirname)));
+const relatedPath = REACT_APP_ENV === 'development' ? `..${path.sep}dist` : '';
+server.use(express.static(path.resolve(__dirname, relatedPath)));
 server.get('/', (req, res) => {
   match({ routes, location: req.url }, (err, redirect, props) => {
     const body = renderToString(<RouterContext {...props} />);
